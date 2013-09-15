@@ -11,8 +11,6 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
@@ -26,9 +24,17 @@ import com.google.common.util.concurrent.JdkFutureAdapters;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-import com.lmax.disruptor.dsl.Disruptor;
 
-public class SwingPacketAnalysisDataProvider implements Runnable {
+/**
+ * A server app showing the use of Java 7 NIO.2 async socket channel APIs.
+ * 
+ * Server receives a Telnet listing request from an NIO client and serves them via Guava's listenable 
+ * futures asynchronously.
+ * 
+ * @author Nitin
+ *
+ */
+public class NIO2NetStatDataProvider implements Runnable {
 	
 	private volatile boolean stopped;
 	private Map<String, AsynchronousSocketChannel> activeConnections = new ConcurrentHashMap<String, AsynchronousSocketChannel>();
@@ -50,11 +56,6 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 			serverSocketChannel.bind(new InetSocketAddress(AppConstants.SERVER_PORT));
 			
 			System.out.println("Server listening on port " + AppConstants.SERVER_PORT);
-			
-			//
-			// Start connection state monitor
-			//
-			//ActiveConnectionsMonitor.start(activeConnections);
 			
 			while(!stopped)
 			{
@@ -85,9 +86,12 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 			e.printStackTrace();
 		}
 		
-		
 	}
 	
+	/**
+	 * Invoked on a channel group pool thread. Once client request is parsed, serves the request on 
+	 * a Guava listenable pool. 
+	 */
 	private class ClientRequestsReadHandler implements CompletionHandler<Integer, ByteBuffer>
 	{
 		
@@ -143,6 +147,9 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 		}
 	}
 	
+	/**
+	 * Blocking call to read netstat data from Windows command line.
+	 */
 	private String readNetStatData() {
 		
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/C", "netstat");
@@ -187,9 +194,12 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 		}
 	}
 	
+	/**
+	 * Serve in a different thread. 
+	 */
 	public void serveNetStatRequest(final String requestID, final AsynchronousSocketChannel clientConnection, final ByteBuffer buffer, final ListeningExecutorService threadPool) {
 		
-		//threadPool.submit(new Runnable() {
+		//threadPool.submit(new Runnable() {//TODO Spawning a new thread for each request.. We could have used a pool for this
 		new Thread(){
 			
 			@Override
@@ -214,7 +224,7 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 							Future<Integer> future = null;
 							try
 							{
-								future = clientConnection.write(buffer);//, buffer, new ServerDataResponseDispatcher(clientConnection));
+								future = clientConnection.write(buffer);
 							}
 							catch(Exception ex)
 							{
@@ -249,6 +259,9 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 								}
 							});
 							
+							//
+							//	Wait here until we get a successful send ack. via the future.
+							//
 							try {
 								latch.await();
 								
@@ -298,56 +311,11 @@ public class SwingPacketAnalysisDataProvider implements Runnable {
 			System.out.println("Client at address '" + clientAddress + "' seems no longer online");
 	}
 
-	private static class ActiveConnectionsMonitor
-	{
-		public static void start(final Map<String, AsynchronousSocketChannel> activeConnections) {
-			new Thread()
-			{
-				public void run() 
-				{
-					while(true)
-					{
-						Collection<AsynchronousSocketChannel> clientConns = activeConnections.values();
-						Iterator<AsynchronousSocketChannel> itr = clientConns.iterator();
-						int numActiveConnections = 0;
-						while(itr.hasNext())
-						{
-							AsynchronousSocketChannel clientConn = itr.next();
-							if(!clientConn.isOpen())
-							{
-								try {
-									
-									System.out.println("[Connection dropped]: client "+ clientConn.getRemoteAddress());
-									itr.remove();
-								} 
-								catch (IOException e) {
-									e.printStackTrace();
-								}
-							}
-							else
-								numActiveConnections++;
-							
-						}
-						
-						System.out.println(">> Num active connections = " + numActiveConnections);
-						
-						try {
-							Thread.sleep(3000);
-						} 
-						catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				
-			}.start();
-		}
-	}
 	
 	//POC
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
-		new Thread(new SwingPacketAnalysisDataProvider()).start();
+		new Thread(new NIO2NetStatDataProvider()).start();
 	}
 
 }

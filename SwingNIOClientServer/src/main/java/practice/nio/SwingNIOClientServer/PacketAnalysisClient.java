@@ -6,6 +6,12 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * A simple socket based client which sends 5 netsat requests to server and then dies.
+ * Any number of clients can be created and run in parallel.
+ * @author Nitin
+ *
+ */
 public class PacketAnalysisClient implements Runnable {
 
 	@Override

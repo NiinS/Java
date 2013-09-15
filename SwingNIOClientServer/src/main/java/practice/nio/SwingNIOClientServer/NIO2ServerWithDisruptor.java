@@ -31,6 +31,10 @@ import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.EventTranslator;
 import com.lmax.disruptor.dsl.Disruptor;
 
+/**
+ * An NIO2 asynch socket channel server using LMAX disruptor to handle/publish NetStat requests from a NIO client. 
+ * @author Nitin
+ */
 public class NIO2ServerWithDisruptor  implements Runnable {
 	
 	private static final int NUM_THREADS_READ_COMPLETION_POOL = 2;
@@ -45,6 +49,9 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 
 		try {
 			
+			//
+			// Used by channel group to post read completion events to notify this server.
+			//
 			ExecutorService readCompletionPool = Executors.newFixedThreadPool(NUM_THREADS_READ_COMPLETION_POOL, new ThreadFactory() {
 				
 				@Override
@@ -58,6 +65,10 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 			
 			AsynchronousServerSocketChannel serverSocketChannel = AsynchronousServerSocketChannel.open(channelGroupForReadCompletionEvents);
 			
+			//
+			// This is a listenable pool returning Guava's listenable futures. Calling it partial because a new future 
+			// will be registered for every partial write until the data is completely sent to client.
+			//
 			ListeningExecutorService partialWriteCompletionPool = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(NUM_THREADS_WRITE_COMPLETION_POOL, new ThreadFactory() {
 				
 				@Override
@@ -66,6 +77,9 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 				}
 			}));
 			
+			//
+			// The ring that will process client events.
+			//
 			Disruptor<ClientEvent> disruptor = new Disruptor<>(new EventFactory<ClientEvent>() {
 					@Override
 					public ClientEvent newInstance() {
@@ -124,6 +138,9 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 		
 	}
 	
+	/**
+	 * Disruptor event representation.
+	 */
 	private class ClientEvent
 	{
 		private String clientRequst;
@@ -173,6 +190,11 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 		}
 	}
 	
+	/**
+	 * Invoked when a client request arrives. Invoked on channel group pool thread. From 
+	 * here we will post the parsed client event to disruptor which will eventually process the
+	 * event and send the result back to client.
+	 */
 	private class ClientRequestsReader implements CompletionHandler<Integer, ByteBuffer>
 	{
 		private final AsynchronousSocketChannel clientConnection;
@@ -233,6 +255,9 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 		}
 	}
 	
+	/**
+	 * Fills the claimed event slot from disruptor ring with latest event from client.
+	 */
 	private class ClientRequestTranslator implements EventTranslator<ClientEvent>
 	{
 		private final ByteBuffer readBuffer;
@@ -262,8 +287,10 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 		}
 	}
 	
-	//Processes events as they become available in ring buffer
-	//this is final processing. Results from here will be sent to client channels associated with a particular request.
+	/**
+	 * Processes events as they become available in ring buffer
+	 * this is final processing. Results from here will be sent to client channels associated with a particular request.
+	 */
 	private class ClientRequestProcessor implements EventHandler<ClientEvent>
 	{
 		private final Disruptor<ClientEvent> disruptor;
@@ -295,6 +322,9 @@ public class NIO2ServerWithDisruptor  implements Runnable {
 			}
 		}
 	
+	/**
+	 * Reads netstat data from Windows.	
+	 */
 	private String readNetStatData() {
 		
 		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/C", "netstat");
