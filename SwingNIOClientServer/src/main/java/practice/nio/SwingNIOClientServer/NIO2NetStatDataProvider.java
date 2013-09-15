@@ -31,6 +31,8 @@ import com.google.common.util.concurrent.MoreExecutors;
  * Server receives a Telnet listing request from an NIO client and serves them via Guava's listenable 
  * futures asynchronously.
  * 
+ * //TODO: don't send the response if client has died. 
+ *	 
  * @author Nitin
  *
  */

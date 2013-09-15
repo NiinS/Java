@@ -34,6 +34,8 @@ import com.lmax.disruptor.dsl.Disruptor;
 /**
  * An NIO2 asynch socket channel server using LMAX disruptor to handle/publish NetStat requests from a NIO client. 
  * @author Nitin
+ * 
+ * TODO: don't send the response if client has died. 
  */
 public class NIO2ServerWithDisruptor  implements Runnable {
 	
