@@ -1,3 +1,11 @@
+My blog supporting this repo with additional articles
+-------------------------------------------------------
+
+http://touch-the-sky-with-glory.blogspot.sg/
+
+(Github wikipages don't seem to have support for user comments.)
+
+
 Java
 ====
 
