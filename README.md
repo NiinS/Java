@@ -1,4 +1,4 @@
-My blog supporting this repo with additional articles
+..supporting this repo with additional articles
 -------------------------------------------------------
 
 http://touch-the-sky-with-glory.blogspot.sg/
