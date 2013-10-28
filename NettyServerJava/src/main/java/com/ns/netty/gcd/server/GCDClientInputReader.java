@@ -1,9 +1,8 @@
-package com.ns.netty.gcd;
+package com.ns.netty.gcd.server;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GCDClientInputReader extends ChannelInboundHandlerAdapter 

@@ -1,4 +1,4 @@
-package com.ns.netty.gcd;
+package com.ns.netty.gcd.client;
 
 import java.net.InetSocketAddress;
 
@@ -9,7 +9,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
-public class GCDNettyClient {
+public class GCDNettyClientMain {
 	
 	public static void main(String[] args) {
 		

@@ -1,4 +1,4 @@
-package com.ns.netty.gcd;
+package com.ns.netty.gcd.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

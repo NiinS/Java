@@ -1,4 +1,4 @@
-package com.ns.netty.gcd;
+package com.ns.netty.gcd.client;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
