@@ -1,4 +1,4 @@
-..supporting this repo with additional articles
+..the blog
 -------------------------------------------------------
 
 http://touch-the-sky-with-glory.blogspot.sg/
