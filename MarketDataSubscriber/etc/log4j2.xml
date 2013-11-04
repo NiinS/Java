@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+     
+    <Configuration status="info">
+
+    <Appenders>
+    
+	    <RandomAccessFile name="RandomAccessFile" fileName="log/app.log" immediateFlush="false" append="false">
+	    	<PatternLayout>
+	    		<Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
+	    	</PatternLayout>
+	    </RandomAccessFile>
+	    
+	    <Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m %ex%n"/>
+		</Console>
+		
+    </Appenders>
+
+    <Loggers>
+	    <Root level="info" includeLocation="false">
+	    <AppenderRef ref="RandomAccessFile"/>
+	     <AppenderRef ref="STDOUT"/>
+	    </Root>
+    </Loggers>
+    
+
+    </Configuration>
