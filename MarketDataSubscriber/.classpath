@@ -23,5 +23,14 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Tools/Installed/MavenRepo/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="com.google.protobuf"/>
+			<attribute name="maven.artifactId" value="protobuf-java"/>
+			<attribute name="maven.version" value="2.5.0"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -1,0 +1,5 @@
+protoc.exe -I<location-where-proto-while-is-saved> --java_out=<location where generated code will be placed> <full path to proto file>
+
+Example:
+
+c:\Tools>protoc -IC:\docs\proto --java_out=C:\docs\proto\src c:\docs\proto\MarketData.proto

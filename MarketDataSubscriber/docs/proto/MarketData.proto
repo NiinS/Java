@@ -1,0 +1,70 @@
+package marketdata;
+
+option java_package = "ns.freetime.proto";
+option java_outer_classname = "MarketDataProto";
+
+message MarketEvent
+{
+
+	//#######################################################################
+	//																		//
+	//					Enum types											//
+	//																		//
+	//########################################################################
+
+	enum EventType 
+	{
+		Trade 		= 0;
+		Quote 		= 1;
+	}
+	
+	enum TradeType
+	{
+		Cash 			= 0;
+		
+		Market 			= 1;
+		
+		Limit 			= 2;
+		
+		Stop_Limit 		= 3;
+		
+		//if multileg, there will be child legs represented by child market events
+		MultiLeg = 4;
+	}
+	
+	enum Side
+	{
+		Buy			= 0;
+		Sell 		= 1;
+	}
+	
+	
+	//#######################################################################
+	//																		//
+	//						Fields declaration section						//
+	//																		//
+	//########################################################################
+	
+	
+	/////////////////  Fields /////////////////////////////////////////////////
+	
+	
+	required EventType type 					= 1;
+	
+	required string eventId 					= 2;
+	
+	required int64 timeStamp					= 3;
+	
+	optional TradeType tradeType				= 4;
+
+	optional Side side 							= 5;
+	
+	optional string currency 					= 6;
+	
+	optional double bid 						= 7;
+	
+	optional double ask 						= 8;
+	
+	optional double quantity 					= 9;
+}
+

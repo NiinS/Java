@@ -19,6 +19,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<junit.version>4.8.2</junit.version>
 		<log4j.version>2.0-beta9</log4j.version>
+		<protobuf-version>2.5.0</protobuf-version>
 	</properties>
 
 	<dependencies>
@@ -69,6 +70,12 @@
        <artifactId>disruptor</artifactId>
        <version>${disruptor.version}</version>
     </dependency>    
+    
+    <dependency>
+    	<groupId>com.google.protobuf</groupId>
+    	<artifactId>protobuf-java</artifactId>
+    	<version>${protobuf-version}</version>
+    </dependency>
 		
 	</dependencies>
 
