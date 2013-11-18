@@ -1,0 +1,25 @@
+
+
+      
+      
+  [Event source]* ---> [Gateway]* ---> Market Event wheel ---> [Event listener]*  -->> (do anything from here on)
+      
+  
+      -- There can be multiple Gateways
+  
+      -- an event wheel is where raw events are pushed and which acts as a bridge between publishers and listeners
+  
+      -- e.g. A Disruptor based wheel will provide a lock-free access to wheel functionality
+  
+      -- other wheel impls can be possible e.g. a blocking queue based wheel realization will have the same 
+         interface but a different internal impl.
+         
+      -- Event representation is protobuf based. Once built, a proto instance can't be built again, there we'd use
+      Builder instances within a wheel and whenever an event slot has to be published or claimed, we'd build it partially
+      to return a partial object.
+      
+        
+         
+            
+     
+

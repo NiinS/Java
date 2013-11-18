@@ -20,6 +20,7 @@
 		<junit.version>4.8.2</junit.version>
 		<log4j.version>2.0-beta9</log4j.version>
 		<protobuf-version>2.5.0</protobuf-version>
+		<spring.version>3.0.7.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
@@ -47,12 +48,6 @@
       <version>${slf4j.version}</version>
     </dependency>
     
-<!--     <dependency> -->
-<!--       <groupId>org.apache.logging.log4j.adapters</groupId> -->
-<!--       <artifactId>log4j-slf4j-impl</artifactId> -->
-<!--       <version>${log4j.version}</version> -->
-<!--     </dependency> -->
-    
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
@@ -77,6 +72,42 @@
     	<version>${protobuf-version}</version>
     </dependency>
 		
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-beans</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+		
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aop</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-asm</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
 	</dependencies>
 
 	<build>
