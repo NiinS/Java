@@ -11,9 +11,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MarketSubscriberMain
 {
-    private static Logger log = LogManager.getLogger( MarketSubscriberMain.class );
-    private List< IMarketGateway > gateways;
-    private IMarketEventWheel eventWheel;
+    private static final Logger log = LogManager.getLogger( MarketSubscriberMain.class );
+    private final List< IMarketGateway > gateways;
+    private final IMarketEventWheel eventWheel;
 
     public MarketSubscriberMain( List< IMarketGateway > gateways, IMarketEventWheel eventWheel )
     {

@@ -108,6 +108,12 @@
 		<version>${spring.version}</version>
 	</dependency>
 
+	<dependency>
+	  	<groupId>com.googlecode.jmockit</groupId>
+	  	<artifactId>jmockit</artifactId>
+	  	<version>1.5</version>
+	</dependency>
+	
 	</dependencies>
 
 	<build>
