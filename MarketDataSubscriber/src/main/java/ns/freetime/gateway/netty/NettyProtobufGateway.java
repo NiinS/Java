@@ -1,23 +1,28 @@
 package ns.freetime.gateway.netty;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import ns.freetime.gateway.IMarketGateway;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import ns.freetime.gateway.IMarketGateway;
+import ns.freetime.pipe.IMarketEventWheel;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class NettyProtobufGateway implements IMarketGateway
 {
-    private int port;
+    private final int port;
+    private final String id;
+    private final IMarketEventWheel eventWheel;
     private final Logger log = LogManager.getLogger( NettyProtobufGateway.class );
     
-    public NettyProtobufGateway(int port)
+    public NettyProtobufGateway(int port, IMarketEventWheel eventWheel)
     {
 	this.port = port;
+	this.eventWheel = eventWheel;
+	id = "Netty-Protobuf-Gateway";
     }
 
     public void start()
@@ -44,12 +49,16 @@ public class NettyProtobufGateway implements IMarketGateway
 	    bossGroup.shutdownGracefully();
 	    handlers.shutdownGracefully();
 	}
-
+	
     }
 
     public void stop()
     {
-	// TODO Auto-generated method stub
+	//TODO do sth
+    }
 
+    public String getID()
+    {
+	return id;
     }
 }
