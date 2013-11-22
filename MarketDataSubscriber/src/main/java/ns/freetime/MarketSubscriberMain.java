@@ -33,7 +33,7 @@ public class MarketSubscriberMain
 
     public static void main( String[ ] args )
     {
-	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "config.xml" );
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext( "context.xml" );
 	MarketSubscriberMain subscriber = context.getBean( MarketSubscriberMain.class );
 	subscriber.start();
     }

@@ -12,8 +12,27 @@
        >
        
        
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+		<property name="location">
+			<value>subscriber-settings.properties</value>
+		</property>
+	</bean>
 
+	<bean id="eventWheel" class="ns.freetime.pipe.disruptor.DisruptorWheelImpl" />
 
+	<bean id="nettyProtobufGateway" class="ns.freetime.gateway.netty.NettyProtobufGateway">
+		<constructor-arg index="0"  value="${port}" />
+		<constructor-arg index="1" ref="eventWheel"/>
+	</bean>
+	
+	<util:list id="eventGateways" list-class="java.util.ArrayList">
+		<ref bean="nettyProtobufGateway" />
+	</util:list>
+
+	<bean id="entryPoint" class="ns.freetime.MarketSubscriberMain">
+		<constructor-arg index="0" ref="eventGateways" />
+		<constructor-arg index="1" ref="eventWheel" />
+	</bean>
 
        
 </beans>

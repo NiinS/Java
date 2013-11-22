@@ -1,27 +1,22 @@
 package ns.freetime.gateway.netty;
 
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class NettyPipeLineInitializer implements ChannelHandler
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+
+public class NettyPipeLineInitializer extends  ChannelInitializer< Channel >
 {
 
-    public void handlerAdded( ChannelHandlerContext ctx ) throws Exception
+    private final Logger log = LogManager.getLogger(NettyPipeLineInitializer.class); 
+	    
+    @Override
+    protected void initChannel( Channel ch ) throws Exception
     {
-	// TODO Auto-generated method stub
-	
+	ChannelPipeline pipeline = ch.pipeline();
+	pipeline.addLast( new RawMarketDataStringHandler() );
+	log.info("Added raw string handler to pipeline.");
     }
-
-    public void handlerRemoved( ChannelHandlerContext ctx ) throws Exception
-    {
-	// TODO Auto-generated method stub
-	
-    }
-
-    public void exceptionCaught( ChannelHandlerContext ctx, Throwable cause ) throws Exception
-    {
-	// TODO Auto-generated method stub
-	
-    }
-
 }
