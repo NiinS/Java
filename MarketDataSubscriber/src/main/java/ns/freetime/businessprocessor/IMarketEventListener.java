@@ -1,4 +1,4 @@
-package ns.freetime.processor;
+package ns.freetime.businessprocessor;
 
 import ns.freetime.proto.MarketDataProto.MarketEvent;
 

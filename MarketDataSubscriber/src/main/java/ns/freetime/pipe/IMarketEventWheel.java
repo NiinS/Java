@@ -1,7 +1,8 @@
 package ns.freetime.pipe;
 
-import ns.freetime.processor.IMarketEventListener;
-import ns.freetime.proto.MarketDataProto.MarketEvent;
+import java.util.List;
+
+import ns.freetime.businessprocessor.IMarketEventListener;
 
 public interface IMarketEventWheel
 {
@@ -9,7 +10,7 @@ public interface IMarketEventWheel
     
     void stopRotating();
     
-    void pushToWheel(MarketEvent event);
-    
-    void registerMarketEventListener(IMarketEventListener eventListener);
+    void registerMarketEventListener(List<IMarketEventListener> eventListeners);
+
+    void pushToWheel( byte[ ] array, int offset, int length );
 }

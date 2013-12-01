@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import ns.freetime.businessprocessor.IMarketEventListener;
 import ns.freetime.gateway.IMarketGateway;
 import ns.freetime.pipe.IMarketEventWheel;
 
@@ -24,11 +25,13 @@ public class MarketSubscriberMain
     private static final Logger log = LogManager.getLogger( MarketSubscriberMain.class );
     private final List< IMarketGateway > gateways;
     private final IMarketEventWheel eventWheel;
+    private List< IMarketEventListener > businessEventListeners;
 
-    public MarketSubscriberMain( List< IMarketGateway > gateways, IMarketEventWheel eventWheel )
+    public MarketSubscriberMain( List< IMarketGateway > gateways, IMarketEventWheel eventWheel, List<IMarketEventListener> businessEventListeners )
     {
 	this.gateways = gateways;
 	this.eventWheel = eventWheel;
+	this.businessEventListeners = businessEventListeners;
     }
 
     public static void main( String[ ] args )
@@ -41,6 +44,7 @@ public class MarketSubscriberMain
     private void start()
     {
 	// Ignite the wheel
+	eventWheel.registerMarketEventListener( businessEventListeners );
 	eventWheel.startRotating();
 	log.info( "Event wheel started" );
 

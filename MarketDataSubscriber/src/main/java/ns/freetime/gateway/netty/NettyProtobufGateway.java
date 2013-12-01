@@ -31,7 +31,7 @@ public class NettyProtobufGateway implements IMarketGateway
 	EventLoopGroup handlers = new NioEventLoopGroup( 2 );
 
 	ServerBootstrap server = new ServerBootstrap();
-	server.group( bossGroup, handlers ).channel( NioServerSocketChannel.class ).childHandler( new NettyPipeLineInitializer() );
+	server.group( bossGroup, handlers ).channel( NioServerSocketChannel.class ).childHandler( new NettyPipeLineInitializer(eventWheel) );
 
 	ChannelFuture channelFuture = server.bind( port );
 	log.info( String.format( "Netty based protobuf gateway started listening on port %d.", port ));
