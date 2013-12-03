@@ -4,7 +4,7 @@
 
     <Appenders>
     
-	    <RandomAccessFile name="RandomAccessFile" fileName="log/app.log" immediateFlush="false" append="false">
+	    <RandomAccessFile name="RandomAccessFile" fileName="log/app.log" immediateFlush="true" append="false">
 	    	<PatternLayout>
 	    		<Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
 	    	</PatternLayout>

@@ -19,7 +19,7 @@
 	</bean>
 
 	<bean id="eventWheel" class="ns.freetime.pipe.disruptor.DisruptorWheelImpl" >
-		<constructor-arg index="0" value="1024"/>
+		<constructor-arg index="0" value="8192"/>
 		<constructor-arg index="1" value="2"/>
 	</bean>
 
