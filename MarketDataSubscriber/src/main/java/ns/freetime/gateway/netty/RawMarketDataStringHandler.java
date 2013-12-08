@@ -6,7 +6,7 @@ import io.netty.handler.codec.MessageToMessageDecoder;
 
 import java.util.List;
 
-import ns.freetime.pipe.IMarketEventWheel;
+import ns.freetime.eventwheel.IMarketEventWheel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

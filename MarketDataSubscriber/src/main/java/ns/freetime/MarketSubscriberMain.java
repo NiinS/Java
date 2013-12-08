@@ -1,14 +1,18 @@
 package ns.freetime;
 
+import java.awt.BorderLayout;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.JFrame;
+
 import ns.freetime.businessprocessor.IMarketEventListener;
+import ns.freetime.businessprocessor.ui.MainUICanvas;
+import ns.freetime.eventwheel.IMarketEventWheel;
 import ns.freetime.gateway.IMarketGateway;
-import ns.freetime.pipe.IMarketEventWheel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,10 +29,12 @@ public class MarketSubscriberMain
     private static final Logger log = LogManager.getLogger( MarketSubscriberMain.class );
     private final List< IMarketGateway > gateways;
     private final IMarketEventWheel eventWheel;
-    private List< IMarketEventListener > businessEventListeners;
+    private final List< IMarketEventListener > businessEventListeners;
+    private final MainUICanvas userInterface;
 
-    public MarketSubscriberMain( List< IMarketGateway > gateways, IMarketEventWheel eventWheel, List<IMarketEventListener> businessEventListeners )
+    public MarketSubscriberMain(MainUICanvas userInterface, List< IMarketGateway > gateways, IMarketEventWheel eventWheel, List<IMarketEventListener> businessEventListeners )
     {
+	this.userInterface = userInterface;
 	this.gateways = gateways;
 	this.eventWheel = eventWheel;
 	this.businessEventListeners = businessEventListeners;
@@ -43,6 +49,9 @@ public class MarketSubscriberMain
 
     private void start()
     {
+	// Launch the UI
+	launchMarketDataViewer(businessEventListeners);
+
 	// Ignite the wheel
 	eventWheel.registerMarketEventListener( businessEventListeners );
 	eventWheel.startRotating();
@@ -51,9 +60,15 @@ public class MarketSubscriberMain
 	// Startup all gateways
 	startGatewaysAsync();
 
-	// Launch the UI
+    }
 
-	log.info( "..." );
+    private void launchMarketDataViewer(List< IMarketEventListener > businessEventListeners2)
+    {
+        final JFrame frame = new JFrame("MarketData ReadOnly");
+        frame.getContentPane().add(userInterface.getContent(),BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(550, 200);
+        frame.setVisible(true);
     }
 
     private void startGatewaysAsync()

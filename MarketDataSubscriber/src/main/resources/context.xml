@@ -18,7 +18,7 @@
 		</property>
 	</bean>
 
-	<bean id="eventWheel" class="ns.freetime.pipe.disruptor.DisruptorWheelImpl" >
+	<bean id="eventWheel" class="ns.freetime.eventwheel.disruptor.DisruptorWheelImpl" >
 		<constructor-arg index="0" value="8192"/>
 		<constructor-arg index="1" value="2"/>
 	</bean>
@@ -32,7 +32,11 @@
 		<ref bean="nettyProtobufGateway" />
 	</util:list>
 	
-	<bean id="userInterfaceMarketEventHandler" class="ns.freetime.businessprocessor.UIMarketEventProcessor" />
+	<bean id="userInterface" class="ns.freetime.businessprocessor.ui.MainUICanvas" />
+	
+	<bean id="userInterfaceMarketEventHandler" class="ns.freetime.businessprocessor.ui.UIMarketEventProcessor" >
+		<constructor-arg index="0" ref="userInterface" />
+	</bean>
 	
 	<util:list id="businessEventHandlers" list-class="java.util.ArrayList">
 		<ref bean="userInterfaceMarketEventHandler" />
@@ -40,9 +44,10 @@
 	
 
 	<bean id="entryPoint" class="ns.freetime.MarketSubscriberMain">
-		<constructor-arg index="0" ref="eventGateways" />
-		<constructor-arg index="1" ref="eventWheel" />
-		<constructor-arg index="2" ref="businessEventHandlers" />
+		<constructor-arg index="0" ref="userInterface"/>
+		<constructor-arg index="1" ref="eventGateways" />
+		<constructor-arg index="2" ref="eventWheel" />
+		<constructor-arg index="3" ref="businessEventHandlers" />
 	</bean>
 
        

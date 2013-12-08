@@ -66,20 +66,20 @@ public final class MarketDataProto {
      */
     ns.freetime.proto.MarketDataProto.MarketEvent.Side getSide();
 
-    // optional string currency = 6;
+    // optional string symbol = 6;
     /**
-     * <code>optional string currency = 6;</code>
+     * <code>optional string symbol = 6;</code>
      */
-    boolean hasCurrency();
+    boolean hasSymbol();
     /**
-     * <code>optional string currency = 6;</code>
+     * <code>optional string symbol = 6;</code>
      */
-    java.lang.String getCurrency();
+    java.lang.String getSymbol();
     /**
-     * <code>optional string currency = 6;</code>
+     * <code>optional string symbol = 6;</code>
      */
     com.google.protobuf.ByteString
-        getCurrencyBytes();
+        getSymbolBytes();
 
     // optional double bid = 7;
     /**
@@ -110,6 +110,56 @@ public final class MarketDataProto {
      * <code>optional double quantity = 9;</code>
      */
     double getQuantity();
+
+    // optional string firm = 10;
+    /**
+     * <code>optional string firm = 10;</code>
+     */
+    boolean hasFirm();
+    /**
+     * <code>optional string firm = 10;</code>
+     */
+    java.lang.String getFirm();
+    /**
+     * <code>optional string firm = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getFirmBytes();
+
+    // optional string counterFirm = 11;
+    /**
+     * <code>optional string counterFirm = 11;</code>
+     */
+    boolean hasCounterFirm();
+    /**
+     * <code>optional string counterFirm = 11;</code>
+     */
+    java.lang.String getCounterFirm();
+    /**
+     * <code>optional string counterFirm = 11;</code>
+     */
+    com.google.protobuf.ByteString
+        getCounterFirmBytes();
+
+    // optional .marketdata.MarketEvent.Status status = 12;
+    /**
+     * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+     */
+    ns.freetime.proto.MarketDataProto.MarketEvent.Status getStatus();
+
+    // optional double executedQty = 13;
+    /**
+     * <code>optional double executedQty = 13;</code>
+     */
+    boolean hasExecutedQty();
+    /**
+     * <code>optional double executedQty = 13;</code>
+     */
+    double getExecutedQty();
   }
   /**
    * Protobuf type {@code marketdata.MarketEvent}
@@ -207,7 +257,7 @@ public final class MarketDataProto {
             }
             case 50: {
               bitField0_ |= 0x00000020;
-              currency_ = input.readBytes();
+              symbol_ = input.readBytes();
               break;
             }
             case 57: {
@@ -223,6 +273,32 @@ public final class MarketDataProto {
             case 73: {
               bitField0_ |= 0x00000100;
               quantity_ = input.readDouble();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000200;
+              firm_ = input.readBytes();
+              break;
+            }
+            case 90: {
+              bitField0_ |= 0x00000400;
+              counterFirm_ = input.readBytes();
+              break;
+            }
+            case 96: {
+              int rawValue = input.readEnum();
+              ns.freetime.proto.MarketDataProto.MarketEvent.Status value = ns.freetime.proto.MarketDataProto.MarketEvent.Status.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(12, rawValue);
+              } else {
+                bitField0_ |= 0x00000800;
+                status_ = value;
+              }
+              break;
+            }
+            case 105: {
+              bitField0_ |= 0x00001000;
+              executedQty_ = input.readDouble();
               break;
             }
           }
@@ -545,6 +621,106 @@ public final class MarketDataProto {
       // @@protoc_insertion_point(enum_scope:marketdata.MarketEvent.Side)
     }
 
+    /**
+     * Protobuf enum {@code marketdata.MarketEvent.Status}
+     */
+    public enum Status
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>Done = 0;</code>
+       */
+      Done(0, 0),
+      /**
+       * <code>Active = 1;</code>
+       */
+      Active(1, 1),
+      /**
+       * <code>Cancelled = 2;</code>
+       */
+      Cancelled(2, 2),
+      /**
+       * <code>Expired = 3;</code>
+       */
+      Expired(3, 3),
+      ;
+
+      /**
+       * <code>Done = 0;</code>
+       */
+      public static final int Done_VALUE = 0;
+      /**
+       * <code>Active = 1;</code>
+       */
+      public static final int Active_VALUE = 1;
+      /**
+       * <code>Cancelled = 2;</code>
+       */
+      public static final int Cancelled_VALUE = 2;
+      /**
+       * <code>Expired = 3;</code>
+       */
+      public static final int Expired_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static Status valueOf(int value) {
+        switch (value) {
+          case 0: return Done;
+          case 1: return Active;
+          case 2: return Cancelled;
+          case 3: return Expired;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<Status>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Status>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Status>() {
+              public Status findValueByNumber(int number) {
+                return Status.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return ns.freetime.proto.MarketDataProto.MarketEvent.getDescriptor().getEnumTypes().get(3);
+      }
+
+      private static final Status[] VALUES = values();
+
+      public static Status valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private Status(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:marketdata.MarketEvent.Status)
+    }
+
     private int bitField0_;
     // required .marketdata.MarketEvent.EventType type = 1;
     public static final int TYPE_FIELD_NUMBER = 1;
@@ -653,20 +829,20 @@ public final class MarketDataProto {
       return side_;
     }
 
-    // optional string currency = 6;
-    public static final int CURRENCY_FIELD_NUMBER = 6;
-    private java.lang.Object currency_;
+    // optional string symbol = 6;
+    public static final int SYMBOL_FIELD_NUMBER = 6;
+    private java.lang.Object symbol_;
     /**
-     * <code>optional string currency = 6;</code>
+     * <code>optional string symbol = 6;</code>
      */
-    public boolean hasCurrency() {
+    public boolean hasSymbol() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional string currency = 6;</code>
+     * <code>optional string symbol = 6;</code>
      */
-    public java.lang.String getCurrency() {
-      java.lang.Object ref = currency_;
+    public java.lang.String getSymbol() {
+      java.lang.Object ref = symbol_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -674,22 +850,22 @@ public final class MarketDataProto {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          currency_ = s;
+          symbol_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string currency = 6;</code>
+     * <code>optional string symbol = 6;</code>
      */
     public com.google.protobuf.ByteString
-        getCurrencyBytes() {
-      java.lang.Object ref = currency_;
+        getSymbolBytes() {
+      java.lang.Object ref = symbol_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        currency_ = b;
+        symbol_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -744,16 +920,138 @@ public final class MarketDataProto {
       return quantity_;
     }
 
+    // optional string firm = 10;
+    public static final int FIRM_FIELD_NUMBER = 10;
+    private java.lang.Object firm_;
+    /**
+     * <code>optional string firm = 10;</code>
+     */
+    public boolean hasFirm() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional string firm = 10;</code>
+     */
+    public java.lang.String getFirm() {
+      java.lang.Object ref = firm_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          firm_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string firm = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFirmBytes() {
+      java.lang.Object ref = firm_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        firm_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string counterFirm = 11;
+    public static final int COUNTERFIRM_FIELD_NUMBER = 11;
+    private java.lang.Object counterFirm_;
+    /**
+     * <code>optional string counterFirm = 11;</code>
+     */
+    public boolean hasCounterFirm() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional string counterFirm = 11;</code>
+     */
+    public java.lang.String getCounterFirm() {
+      java.lang.Object ref = counterFirm_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          counterFirm_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string counterFirm = 11;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCounterFirmBytes() {
+      java.lang.Object ref = counterFirm_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        counterFirm_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional .marketdata.MarketEvent.Status status = 12;
+    public static final int STATUS_FIELD_NUMBER = 12;
+    private ns.freetime.proto.MarketDataProto.MarketEvent.Status status_;
+    /**
+     * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+     */
+    public ns.freetime.proto.MarketDataProto.MarketEvent.Status getStatus() {
+      return status_;
+    }
+
+    // optional double executedQty = 13;
+    public static final int EXECUTEDQTY_FIELD_NUMBER = 13;
+    private double executedQty_;
+    /**
+     * <code>optional double executedQty = 13;</code>
+     */
+    public boolean hasExecutedQty() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional double executedQty = 13;</code>
+     */
+    public double getExecutedQty() {
+      return executedQty_;
+    }
+
     private void initFields() {
       type_ = ns.freetime.proto.MarketDataProto.MarketEvent.EventType.Trade;
       eventId_ = "";
       timeStamp_ = 0L;
       tradeType_ = ns.freetime.proto.MarketDataProto.MarketEvent.TradeType.Cash;
       side_ = ns.freetime.proto.MarketDataProto.MarketEvent.Side.Buy;
-      currency_ = "";
+      symbol_ = "";
       bid_ = 0D;
       ask_ = 0D;
       quantity_ = 0D;
+      firm_ = "";
+      counterFirm_ = "";
+      status_ = ns.freetime.proto.MarketDataProto.MarketEvent.Status.Done;
+      executedQty_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -795,7 +1093,7 @@ public final class MarketDataProto {
         output.writeEnum(5, side_.getNumber());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, getCurrencyBytes());
+        output.writeBytes(6, getSymbolBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeDouble(7, bid_);
@@ -805,6 +1103,18 @@ public final class MarketDataProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeDouble(9, quantity_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(10, getFirmBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeBytes(11, getCounterFirmBytes());
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeEnum(12, status_.getNumber());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeDouble(13, executedQty_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -837,7 +1147,7 @@ public final class MarketDataProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, getCurrencyBytes());
+          .computeBytesSize(6, getSymbolBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -850,6 +1160,22 @@ public final class MarketDataProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(9, quantity_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getFirmBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(11, getCounterFirmBytes());
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(12, status_.getNumber());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(13, executedQty_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -977,7 +1303,7 @@ public final class MarketDataProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         side_ = ns.freetime.proto.MarketDataProto.MarketEvent.Side.Buy;
         bitField0_ = (bitField0_ & ~0x00000010);
-        currency_ = "";
+        symbol_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
         bid_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -985,6 +1311,14 @@ public final class MarketDataProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         quantity_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000100);
+        firm_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
+        counterFirm_ = "";
+        bitField0_ = (bitField0_ & ~0x00000400);
+        status_ = ns.freetime.proto.MarketDataProto.MarketEvent.Status.Done;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        executedQty_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -1036,7 +1370,7 @@ public final class MarketDataProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.currency_ = currency_;
+        result.symbol_ = symbol_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
@@ -1049,6 +1383,22 @@ public final class MarketDataProto {
           to_bitField0_ |= 0x00000100;
         }
         result.quantity_ = quantity_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.firm_ = firm_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.counterFirm_ = counterFirm_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.status_ = status_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.executedQty_ = executedQty_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1082,9 +1432,9 @@ public final class MarketDataProto {
         if (other.hasSide()) {
           setSide(other.getSide());
         }
-        if (other.hasCurrency()) {
+        if (other.hasSymbol()) {
           bitField0_ |= 0x00000020;
-          currency_ = other.currency_;
+          symbol_ = other.symbol_;
           onChanged();
         }
         if (other.hasBid()) {
@@ -1095,6 +1445,22 @@ public final class MarketDataProto {
         }
         if (other.hasQuantity()) {
           setQuantity(other.getQuantity());
+        }
+        if (other.hasFirm()) {
+          bitField0_ |= 0x00000200;
+          firm_ = other.firm_;
+          onChanged();
+        }
+        if (other.hasCounterFirm()) {
+          bitField0_ |= 0x00000400;
+          counterFirm_ = other.counterFirm_;
+          onChanged();
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        if (other.hasExecutedQty()) {
+          setExecutedQty(other.getExecutedQty());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1350,76 +1716,76 @@ public final class MarketDataProto {
         return this;
       }
 
-      // optional string currency = 6;
-      private java.lang.Object currency_ = "";
+      // optional string symbol = 6;
+      private java.lang.Object symbol_ = "";
       /**
-       * <code>optional string currency = 6;</code>
+       * <code>optional string symbol = 6;</code>
        */
-      public boolean hasCurrency() {
+      public boolean hasSymbol() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional string currency = 6;</code>
+       * <code>optional string symbol = 6;</code>
        */
-      public java.lang.String getCurrency() {
-        java.lang.Object ref = currency_;
+      public java.lang.String getSymbol() {
+        java.lang.Object ref = symbol_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          currency_ = s;
+          symbol_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string currency = 6;</code>
+       * <code>optional string symbol = 6;</code>
        */
       public com.google.protobuf.ByteString
-          getCurrencyBytes() {
-        java.lang.Object ref = currency_;
+          getSymbolBytes() {
+        java.lang.Object ref = symbol_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          currency_ = b;
+          symbol_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string currency = 6;</code>
+       * <code>optional string symbol = 6;</code>
        */
-      public Builder setCurrency(
+      public Builder setSymbol(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000020;
-        currency_ = value;
+        symbol_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string currency = 6;</code>
+       * <code>optional string symbol = 6;</code>
        */
-      public Builder clearCurrency() {
+      public Builder clearSymbol() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        currency_ = getDefaultInstance().getCurrency();
+        symbol_ = getDefaultInstance().getSymbol();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string currency = 6;</code>
+       * <code>optional string symbol = 6;</code>
        */
-      public Builder setCurrencyBytes(
+      public Builder setSymbolBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000020;
-        currency_ = value;
+        symbol_ = value;
         onChanged();
         return this;
       }
@@ -1523,6 +1889,223 @@ public final class MarketDataProto {
         return this;
       }
 
+      // optional string firm = 10;
+      private java.lang.Object firm_ = "";
+      /**
+       * <code>optional string firm = 10;</code>
+       */
+      public boolean hasFirm() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional string firm = 10;</code>
+       */
+      public java.lang.String getFirm() {
+        java.lang.Object ref = firm_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          firm_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string firm = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFirmBytes() {
+        java.lang.Object ref = firm_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          firm_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string firm = 10;</code>
+       */
+      public Builder setFirm(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        firm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string firm = 10;</code>
+       */
+      public Builder clearFirm() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        firm_ = getDefaultInstance().getFirm();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string firm = 10;</code>
+       */
+      public Builder setFirmBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        firm_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string counterFirm = 11;
+      private java.lang.Object counterFirm_ = "";
+      /**
+       * <code>optional string counterFirm = 11;</code>
+       */
+      public boolean hasCounterFirm() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional string counterFirm = 11;</code>
+       */
+      public java.lang.String getCounterFirm() {
+        java.lang.Object ref = counterFirm_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          counterFirm_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string counterFirm = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCounterFirmBytes() {
+        java.lang.Object ref = counterFirm_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          counterFirm_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string counterFirm = 11;</code>
+       */
+      public Builder setCounterFirm(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        counterFirm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string counterFirm = 11;</code>
+       */
+      public Builder clearCounterFirm() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        counterFirm_ = getDefaultInstance().getCounterFirm();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string counterFirm = 11;</code>
+       */
+      public Builder setCounterFirmBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000400;
+        counterFirm_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional .marketdata.MarketEvent.Status status = 12;
+      private ns.freetime.proto.MarketDataProto.MarketEvent.Status status_ = ns.freetime.proto.MarketDataProto.MarketEvent.Status.Done;
+      /**
+       * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+       */
+      public ns.freetime.proto.MarketDataProto.MarketEvent.Status getStatus() {
+        return status_;
+      }
+      /**
+       * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+       */
+      public Builder setStatus(ns.freetime.proto.MarketDataProto.MarketEvent.Status value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000800;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .marketdata.MarketEvent.Status status = 12;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        status_ = ns.freetime.proto.MarketDataProto.MarketEvent.Status.Done;
+        onChanged();
+        return this;
+      }
+
+      // optional double executedQty = 13;
+      private double executedQty_ ;
+      /**
+       * <code>optional double executedQty = 13;</code>
+       */
+      public boolean hasExecutedQty() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional double executedQty = 13;</code>
+       */
+      public double getExecutedQty() {
+        return executedQty_;
+      }
+      /**
+       * <code>optional double executedQty = 13;</code>
+       */
+      public Builder setExecutedQty(double value) {
+        bitField0_ |= 0x00001000;
+        executedQty_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double executedQty = 13;</code>
+       */
+      public Builder clearExecutedQty() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        executedQty_ = 0D;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:marketdata.MarketEvent)
     }
 
@@ -1548,18 +2131,22 @@ public final class MarketDataProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020MarketData.proto\022\nmarketdata\"\214\003\n\013Marke" +
+      "\n\020MarketData.proto\022\nmarketdata\"\256\004\n\013Marke" +
       "tEvent\022/\n\004type\030\001 \002(\0162!.marketdata.Market" +
       "Event.EventType\022\017\n\007eventId\030\002 \002(\t\022\021\n\ttime" +
       "Stamp\030\003 \002(\003\0224\n\ttradeType\030\004 \001(\0162!.marketd" +
       "ata.MarketEvent.TradeType\022*\n\004side\030\005 \001(\0162" +
-      "\034.marketdata.MarketEvent.Side\022\020\n\010currenc" +
-      "y\030\006 \001(\t\022\013\n\003bid\030\007 \001(\001\022\013\n\003ask\030\010 \001(\001\022\020\n\010qua" +
-      "ntity\030\t \001(\001\"!\n\tEventType\022\t\n\005Trade\020\000\022\t\n\005Q" +
-      "uote\020\001\"J\n\tTradeType\022\010\n\004Cash\020\000\022\n\n\006Market\020" +
-      "\001\022\t\n\005Limit\020\002\022\016\n\nStop_Limit\020\003\022\014\n\010MultiLeg",
-      "\020\004\"\031\n\004Side\022\007\n\003Buy\020\000\022\010\n\004Sell\020\001B$\n\021ns.free" +
-      "time.protoB\017MarketDataProto"
+      "\034.marketdata.MarketEvent.Side\022\016\n\006symbol\030" +
+      "\006 \001(\t\022\013\n\003bid\030\007 \001(\001\022\013\n\003ask\030\010 \001(\001\022\020\n\010quant" +
+      "ity\030\t \001(\001\022\014\n\004firm\030\n \001(\t\022\023\n\013counterFirm\030\013" +
+      " \001(\t\022.\n\006status\030\014 \001(\0162\036.marketdata.Market" +
+      "Event.Status\022\023\n\013executedQty\030\r \001(\001\"!\n\tEve",
+      "ntType\022\t\n\005Trade\020\000\022\t\n\005Quote\020\001\"J\n\tTradeTyp" +
+      "e\022\010\n\004Cash\020\000\022\n\n\006Market\020\001\022\t\n\005Limit\020\002\022\016\n\nSt" +
+      "op_Limit\020\003\022\014\n\010MultiLeg\020\004\"\031\n\004Side\022\007\n\003Buy\020" +
+      "\000\022\010\n\004Sell\020\001\":\n\006Status\022\010\n\004Done\020\000\022\n\n\006Activ" +
+      "e\020\001\022\r\n\tCancelled\020\002\022\013\n\007Expired\020\003B$\n\021ns.fr" +
+      "eetime.protoB\017MarketDataProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1571,7 +2158,7 @@ public final class MarketDataProto {
           internal_static_marketdata_MarketEvent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_marketdata_MarketEvent_descriptor,
-              new java.lang.String[] { "Type", "EventId", "TimeStamp", "TradeType", "Side", "Currency", "Bid", "Ask", "Quantity", });
+              new java.lang.String[] { "Type", "EventId", "TimeStamp", "TradeType", "Side", "Symbol", "Bid", "Ask", "Quantity", "Firm", "CounterFirm", "Status", "ExecutedQty", });
           return null;
         }
       };

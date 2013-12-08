@@ -38,6 +38,13 @@ message MarketEvent
 		Sell 		= 1;
 	}
 	
+	enum Status
+	{
+		Done					= 0;
+		Active					= 1;
+		Cancelled				= 2;
+		Expired					= 3;
+	}
 	
 	//#######################################################################
 	//																		//
@@ -59,12 +66,21 @@ message MarketEvent
 
 	optional Side side 							= 5;
 	
-	optional string currency 					= 6;
+	optional string symbol 						= 6;
 	
 	optional double bid 						= 7;
 	
 	optional double ask 						= 8;
 	
 	optional double quantity 					= 9;
+	
+	optional string firm						= 10;
+	
+	optional string counterFirm					= 11;
+	
+	optional Status	status						= 12;
+
+	optional double executedQty					= 13;
+	
 }
 

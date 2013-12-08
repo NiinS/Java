@@ -1,4 +1,4 @@
-package ns.freetime.pipe;
+package ns.freetime.eventwheel;
 
 import java.util.List;
 

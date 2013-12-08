@@ -4,7 +4,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import ns.freetime.pipe.IMarketEventWheel;
+import ns.freetime.eventwheel.IMarketEventWheel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
