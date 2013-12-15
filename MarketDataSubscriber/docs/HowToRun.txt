@@ -1,0 +1,15 @@
+
+To run subscriber:
+------------------------
+
+-- Main class: ns.freetime.MarketSubscriberMain
+-- Should have /resources, /etc and compiled code in class path
+
+
+To run sample data provider:
+------------------------------
+
+-- Main class: sample.SampleMarketDataSource
+-- Pass "1091" as port no as program argument to connect to subscriber. Subscriber's port no can be changed in /etc/
+subscriber-settings.properties file.
+
