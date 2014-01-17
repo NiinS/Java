@@ -1,7 +1,7 @@
 ..the blog
 -------------------------------------------------------
 
-http://touch-the-sky-with-glory.blogspot.sg/
+http://krasnikov-tube.blogspot.sg/
 
 (Github wikipages don't seem to have support for user comments.)
 
