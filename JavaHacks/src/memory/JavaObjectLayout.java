@@ -42,7 +42,7 @@ import com.javamex.classmexer.MemoryUtil;
   @Date: Jan 26, 2014 (on a sunny breezy Sunday)
  
  */
-public class SizeOf
+public class JavaObjectLayout
 {
     public static void main( String[ ] args ) throws Exception
     {
