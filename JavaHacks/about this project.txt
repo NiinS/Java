@@ -1,0 +1,3 @@
+Read my blog entry to understand how JAva object sizes can be computed. This Java project is to verify that understanding.
+
+http://krasnikov-tube.blogspot.co.uk/2014/01/dissecting-java-object-layout-and.html
