@@ -15,22 +15,27 @@ import com.javamex.classmexer.MemoryUtil;
  * Duplication of code is deliberate to help reduce the navigation across
  * methods. In a future version, I'd refactor it.
  * 
- * This code requires:
- * 
+ * <p>This code requires use of Java 7 or less and the following:
+ * <p>
+ *
  * 1. Use of sun.misc.Unsafe and 2. classmexer.jar (to compute object sizes) and
+ * <br/>
  * 3. following VM props:
- * 
- * -javaagent:classmexer.jar (coz classmexer implements a Java instrumentation
- * agent) -XX:-UseCompressedOops (we'd experiment with compressed pointers on a
+ * <br/>-javaagent:classmexer.jar (coz classmexer implements a Java instrumentation
+ * agent)
+ * <br/>-XX:-UseCompressedOops (we'd experiment with compressed pointers on a
  * 64 bit VM)
- * 
+ * </p>
+ *
+ * <p></p>
  * How to run and test: ----------------------
- * 
+ * <br/>
  * 1. Put the jar in class path and working dir of Java project (project root)
+ * * <br/>
  * 2. Import sun.misc.Unsafe and visit
- * http://stackoverflow.com/questions/860187/
- * access-restriction-on-class-due-to-restriction-on-required-library-rt-jar
- * 
+ * http://stackoverflow.com/questions/860187/access-restriction-on-class-due-to-restriction-on-required-library-rt-jar
+ * </p>
+ * <p>
  * Credits:
  * 
  * All these experts have helped me understand Java object layout better.
